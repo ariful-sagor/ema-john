@@ -5,7 +5,7 @@ Features:
 - Watch available products.
 - Add many products to cart.
 - See details of each products.
-- Log in do purchase.
+- Log in and continue to purchase.
 
 Used tools:
 - React
