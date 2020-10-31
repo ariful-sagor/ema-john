@@ -10,15 +10,20 @@ import { Link } from 'react-router-dom';
 
 
 const Shop = () => {
-    // const first10= fakeData.slice(0,10);
-    const [products, setProducts]=useState([])
-    const [cart,setCart]=useState([])
+    const [products, setProducts]=useState([]);
+    const [cart,setCart]=useState([]);
+
+    const [search, setSearch] = useState('');
+    const handleBlur=event =>{
+        setSearch(event.target.value);
+        console.log(event.target.value);
+    }
     
     useEffect(()=>{
-        fetch("https://fast-coast-84643.herokuapp.com/products")
+        fetch('https://fast-coast-84643.herokuapp.com/products?search='+search)
         .then(res => res.json())
         .then(data => setProducts(data))
-    })
+    },[search])
 
     useEffect(()=>{
         const saveCart = getDatabaseCart();
@@ -55,9 +60,13 @@ const Shop = () => {
 
     }
 
+
     return (
         <div className="shop-container">
             <div className="product-container">
+            <br />
+                <input style={{width: '220px'}} onBlur={handleBlur} type="text" placeholder="Search"/>               
+                <button style={{width: '80px', margin:'10px'}}>Search</button>                
              
             {
             products.map(pd=> <Product
